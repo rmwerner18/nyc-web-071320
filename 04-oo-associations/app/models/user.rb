@@ -56,6 +56,7 @@ class User
     def adopt_animal(animal_instance) # bob
         if self.pets.count < 3
             animal_instance.owner = self #self is the current user instance
+            animal_instance.shelter = nil
         else
             puts "Stop it. Get some help."
         end
@@ -67,13 +68,21 @@ class User
         end
     end
 
+    def give_animal_to_shelter(animal, shelter)
+        if animal.owner == self || animal.owner == nil
+            animal.owner = nil
+            animal.shelter = shelter
+            "#{animal.name} has been given to #{shelter.name}"
+        else
+            "That's not your pet"
+    end
+    end
     private
 
 
     def increment_views
         @views += 1
     end
-
 
 end
 
